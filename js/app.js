@@ -61,6 +61,8 @@ const dataWizardry = document.querySelectorAll('[data-nav]');
 
 
 function isInViewport() {
+   //Currently saying this ↓ is not a function
+   //Need to figure out a way to call this
     const box = sections.getBoundingClientRect();
     //Looping through the ↓ sections to find the section in view
     for (const section of sections) {
@@ -141,4 +143,4 @@ fourthSec.classList.add("your-active-class");
 
 })*/
 // Set sections as active on scoll
-document.addEventListener("scoll", isInViewport)
+document.addEventListener("scroll", isInViewport)
