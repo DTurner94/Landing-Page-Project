@@ -35,19 +35,17 @@
 //Navigation bar variables
 const ul = document.getElementById('navbar__list');
 const li = document.querySelectorAll('li');
-const firstLi = document.createElement('li');
-const secondLi = document.createElement('li');
-const thirdLi = document.createElement('li');
-const fourthLi = document.createElement('li');
+const lists = ["Section 1", "Section 2", "Section 3", "Section 4"];
+const fragment = new DocumentFragment();
+
 
 
 //Variables for the sections
-const sections = document.querySelectorAll('.section');
+const sections = document.querySelectorAll('section');
 const firstSec = document.getElementById('section1');
 const secondSec = document.getElementById('section2');
 const thirdSec = document.getElementById('section3');
 const fourthSec = document.getElementById('section4');
-const forth = document.createElement('p');
 
 //Building the section variables
 const activeClass = document.getElementsByClassName("your-active-class");
@@ -64,7 +62,7 @@ function isInViewport() {
     //Looping through the ↓ sections to find the section in view
     for (const section of sections) {
         //Need to figure out why it's not working
-        const box = window.getBoundingClientRect();
+        const box = sections.getBoundingClientRect();
         //need to figure out if the values are correct on not
         //This should target the section in view but nothing is working so far
         if (box.top <= 150 && box.bottom <= 150) {
@@ -76,6 +74,8 @@ function isInViewport() {
 }
 
 
+
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -84,17 +84,16 @@ function isInViewport() {
 
 
 //The text for the Navigation
-ul.appendChild(firstLi)
-firstLi.innerText = 'Section 1';
-ul.appendChild(secondLi)
-secondLi.innerText = 'Section 2';
-ul.appendChild(thirdLi)
-thirdLi.innerText = 'Section 3';
-ul.appendChild(fourthLi)
-fourthLi.innerText = 'Section 4';
+for (const list of lists) {
+    const li = document.createElement("li");
+    li.textContent = list;
+    fragment.append(li);
+}
+ul.append(fragment);
+
 //Need to use data-nav or id to link to the sections
 
-//Added the class to the sections to try out toggling - so far hasn't worked
+//Added the class to the sections for toggling
 secondSec.classList.add("your-active-class");
 thirdSec.classList.add("your-active-class");
 fourthSec.classList.add("your-active-class");
@@ -139,8 +138,7 @@ fourthSec.classList.add("your-active-class");
 })*/
 // Set sections as active on scoll
 document.addEventListener("scroll", isInViewport())
-/*document.addEventListener('scroll', function () {
-    firstSec.classList.toggle('your-active-class')
-    thirdSec.classList.add('your-active-class')
+document.addEventListener('click', function () {
+    thirdSec.classList.toggle('your-active-class')
     console.log('Section color is now blue')
-})*/
+})
