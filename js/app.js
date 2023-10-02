@@ -61,22 +61,17 @@ const dataWizardry = document.querySelectorAll('[data-nav]');
 
 
 function isInViewport() {
-   //Currently saying this ↓ is not a function
-   //Need to figure out a way to call this
-    const box = sections.getBoundingClientRect();
     //Looping through the ↓ sections to find the section in view
     for (const section of sections) {
+        //Need to figure out why it's not working
+        const box = window.getBoundingClientRect();
         //need to figure out if the values are correct on not
         //This should target the section in view but nothing is working so far
         if (box.top <= 150 && box.bottom <= 150) {
             //If the section is in view add the class
             section.classList.toggle("your-active-class");
-            console.log('added class');
-        } else {
-            //if the section is not in view remove it
-            section.classList.remove("your-active-class");
-            console.log('removed class')
-     }
+            console.log('Class is active!!!');
+        } 
     }
 }
 
@@ -143,4 +138,9 @@ fourthSec.classList.add("your-active-class");
 
 })*/
 // Set sections as active on scoll
-document.addEventListener("scroll", isInViewport)
+document.addEventListener("scroll", isInViewport())
+/*document.addEventListener('scroll', function () {
+    firstSec.classList.toggle('your-active-class')
+    thirdSec.classList.add('your-active-class')
+    console.log('Section color is now blue')
+})*/
