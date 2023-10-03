@@ -60,18 +60,53 @@ const dataWizardry = document.querySelectorAll('[data-nav]');
 
 function isInViewport() {
     //Looping through the ↓ sections to find the section in view
-    for (const section of sections) {
-        //Need to figure out why it's not working
-        const box = sections.getBoundingClientRect();
-        //need to figure out if the values are correct on not
-        //This should target the section in view but nothing is working so far
-        if (box.top <= 150 && box.bottom <= 150) {
-            //If the section is in view add the class
-            section.classList.toggle("your-active-class");
+    //Working but now working too well.
+    //I made a mess of this
+        const firstBox = firstSec.getBoundingClientRect();
+        const secondBox =secondSec.getBoundingClientRect();
+        const thirdBox = thirdSec.getBoundingClientRect();
+        const fourthBox = fourthSec.getBoundingClientRect();
+    //Still targeted even if its not in viewport
+    //Values are not correct in the slightest, not even negatives are working
+    //first section
+        if (firstBox.top <= 8 /*&& firstBox.bottom <= -649*/) {
+            //If the section is in view add the class ↑
+            firstSec.classList.toggle("your-active-class");
             console.log('Class is active!!!');
-        } 
-    }
+        } else {
+            secondSec.classList.remove("your-active-class");
+            thirdSec.classList.remove("your-active-class");
+            fourthSec.classList.remove("your-active-class");
+        }
+    //second section
+        if (secondBox.top <= 47 && secondBox.bottom <= 249) {
+            secondSec.classList.toggle("your-active-class");
+            console.log('2nd Class is active!!!');
+        } else {
+            firstSec.classList.remove("your-active-class");
+            thirdSec.classList.remove("your-active-class");
+            fourthSec.classList.remove("your-active-class");
+        }
+    //third section
+    if (thirdBox.top <= 29 && thirdBox.bottom <= 107) {
+        thirdSec.classList.toggle("your-active-class");
+        console.log('3rd Class is active!!!');
+    } else {
+        secondSec.classList.remove("your-active-class");
+            firstSec.classList.remove("your-active-class");
+            fourthSec.classList.remove("your-active-class");
+     }
+    //fourth section
+    if (fourthBox.top <= 29) {
+            fourthSec.classList.toggle("your-active-class");
+            console.log('4th Class is active!!!');
+    } else {  
+        firstSec.classList.remove("your-active-class");
+            thirdSec.classList.remove("your-active-class");
+            secondSec.classList.remove("your-active-class");
+      }
 }
+
 
 
 
@@ -91,30 +126,13 @@ for (const list of lists) {
 }
 ul.append(fragment);
 
-//Need to use data-nav or id to link to the sections
-
-//Added the class to the sections for toggling
-secondSec.classList.add("your-active-class");
-thirdSec.classList.add("your-active-class");
-fourthSec.classList.add("your-active-class");
 
 
 // Add class 'active' to section when near top of viewport
 //Step1: Need to figure out to see what's in viewport
 //Step2: Need to set whatever is in current viewport to active  
 
-//If statement?
-/*
- if (section is in viewport){
- set the the class of the section to active
- or add the section class to active w/ classList add method
- } else {
- remove active from the class
- or remove the class from the section w/ classList remove method
- }
- }
- }
-*/
+
 
 
 
@@ -129,16 +147,16 @@ fourthSec.classList.add("your-active-class");
 // Scroll to anchor ID using scrollTO event
 //used for smooth scrolling
 // Build menu 
-
 // Scroll to section on link click
-/*document.addEventListener('click', function (e) {
-    //Add prevent default
-    //When a nav button is clicked on the navigation bar it will go to the correspind section
+/*li.addEventListener('click', function () {
+    //Smooth scroll to the corresponding section
+    window.scrollTo({
+        top: 100,
+        left: 100,
+        behavior: "smooth",
+      });
+}) */
 
-})*/
 // Set sections as active on scoll
-document.addEventListener("scroll", isInViewport())
-document.addEventListener('click', function () {
-    thirdSec.classList.toggle('your-active-class')
-    console.log('Section color is now blue')
-})
+document.addEventListener("scroll", function () { isInViewport(); })
+
