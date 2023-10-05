@@ -34,9 +34,19 @@
 
 //Navigation bar variables
 const ul = document.getElementById('navbar__list');
-const li = document.querySelectorAll('li');
-const lists = ["Section 1", "Section 2", "Section 3", "Section 4"];
-const fragment = new DocumentFragment();
+const firstLi = document.createElement('li');
+const secondLi = document.createElement('li');
+const thirdLi = document.createElement('li');
+const fourthLi = document.createElement('li');
+//firstLi.textContent = "Section 1"
+
+/*const lists = ["", "", "", ""];
+const fragment = new DocumentFragment();*/
+const newAnchorOne = document.createElement('a');
+const newAnchorTwo = document.createElement('a');
+const newAnchorThree = document.createElement('a');
+const newAnchorFour = document.createElement('a');
+
 
 
 
@@ -114,29 +124,28 @@ function isInViewport() {
 /**
  * End Helper Functions
  * Begin Main Functions
- * 
 */
-
-
-//The text for the Navigation
-for (const list of lists) {
-    const li = document.createElement("li");
-    li.textContent = list;
-    fragment.append(li);
-}
-ul.append(fragment);
-
-
-
-// Add class 'active' to section when near top of viewport
-//Step1: Need to figure out to see what's in viewport
-//Step2: Need to set whatever is in current viewport to active  
-
-
-
-
-
-
+//The code for the Navigation
+//The first Section
+newAnchorOne.textContent = ('Section 1');
+newAnchorOne.setAttribute('href', '#section1');
+firstLi.appendChild(newAnchorOne);
+ul.append(firstLi);
+//The second Section
+newAnchorTwo.textContent = ('Section 2');
+newAnchorTwo.setAttribute('href', '#section2');
+secondLi.appendChild(newAnchorTwo);
+ul.append(secondLi);
+//The third Section
+newAnchorThree.textContent = ('Section 3');
+newAnchorThree.setAttribute('href', '#section3');
+thirdLi.appendChild(newAnchorThree);
+ul.append(thirdLi);
+//The fourth Section
+newAnchorFour.textContent = ('Section 4');
+newAnchorFour.setAttribute('href', '#section4');
+fourthLi.appendChild(newAnchorFour);
+ul.append(fourthLi);
 
 /**
  * End Main Functions
@@ -144,19 +153,19 @@ ul.append(fragment);
  * 
 */
 
-// Scroll to anchor ID using scrollTO event
-//used for smooth scrolling
-// Build menu 
+
 // Scroll to section on link click
-/*li.addEventListener('click', function () {
-    //Smooth scroll to the corresponding section
-    window.scrollTo({
-        top: 100,
-        left: 100,
-        behavior: "smooth",
-      });
-}) */
 
 // Set sections as active on scoll
-document.addEventListener("scroll", function () { isInViewport(); })
+document.addEventListener("scroll", function () {isInViewport();})
 
+li.addEventListener('click', function () {
+    //Smooth scroll to the corresponding section
+    //behavior: "smooth";
+    document.body.style.backgroundColor = "red";
+    document.body.style.Color = "blue";
+    firstSec.scrollTo({
+        top: 100,
+        behavior: "smooth",
+      });
+})
