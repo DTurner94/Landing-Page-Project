@@ -34,24 +34,19 @@
 
 //Navigation bar variables
 const ul = document.getElementById('navbar__list');
+const liMagic = document.querySelectorAll('li')
 const firstLi = document.createElement('li');
 const secondLi = document.createElement('li');
 const thirdLi = document.createElement('li');
 const fourthLi = document.createElement('li');
-//firstLi.textContent = "Section 1"
-
-/*const lists = ["", "", "", ""];
-const fragment = new DocumentFragment();*/
+//anchor elements for the nav
 const newAnchorOne = document.createElement('a');
 const newAnchorTwo = document.createElement('a');
 const newAnchorThree = document.createElement('a');
 const newAnchorFour = document.createElement('a');
 
-
-
-
 //Variables for the sections
-const sections = document.querySelectorAll('section');
+const sections = document.querySelectorAll('main section');
 const firstSec = document.getElementById('section1');
 const secondSec = document.getElementById('section2');
 const thirdSec = document.getElementById('section3');
@@ -68,58 +63,6 @@ const dataWizardry = document.querySelectorAll('[data-nav]');
 */
 
 
-function isInViewport() {
-    //Looping through the ↓ sections to find the section in view
-    //Working but now working too well.
-    //I made a mess of this
-        const firstBox = firstSec.getBoundingClientRect();
-        const secondBox =secondSec.getBoundingClientRect();
-        const thirdBox = thirdSec.getBoundingClientRect();
-        const fourthBox = fourthSec.getBoundingClientRect();
-    //Still targeted even if its not in viewport
-    //Values are not correct in the slightest, not even negatives are working
-    //first section
-        if (firstBox.top <= 8 /*&& firstBox.bottom <= -649*/) {
-            //If the section is in view add the class ↑
-            firstSec.classList.toggle("your-active-class");
-            console.log('Class is active!!!');
-        } else {
-            secondSec.classList.remove("your-active-class");
-            thirdSec.classList.remove("your-active-class");
-            fourthSec.classList.remove("your-active-class");
-        }
-    //second section
-        if (secondBox.top <= 47 && secondBox.bottom <= 249) {
-            secondSec.classList.toggle("your-active-class");
-            console.log('2nd Class is active!!!');
-        } else {
-            firstSec.classList.remove("your-active-class");
-            thirdSec.classList.remove("your-active-class");
-            fourthSec.classList.remove("your-active-class");
-        }
-    //third section
-    if (thirdBox.top <= 29 && thirdBox.bottom <= 107) {
-        thirdSec.classList.toggle("your-active-class");
-        console.log('3rd Class is active!!!');
-    } else {
-        secondSec.classList.remove("your-active-class");
-            firstSec.classList.remove("your-active-class");
-            fourthSec.classList.remove("your-active-class");
-     }
-    //fourth section
-    if (fourthBox.top <= 29) {
-            fourthSec.classList.toggle("your-active-class");
-            console.log('4th Class is active!!!');
-    } else {  
-        firstSec.classList.remove("your-active-class");
-            thirdSec.classList.remove("your-active-class");
-            secondSec.classList.remove("your-active-class");
-      }
-}
-
-
-
-
 
 /**
  * End Helper Functions
@@ -130,22 +73,60 @@ function isInViewport() {
 newAnchorOne.textContent = ('Section 1');
 newAnchorOne.setAttribute('href', '#section1');
 firstLi.appendChild(newAnchorOne);
+firstLi.setAttribute('id', 'section1-nav')
 ul.append(firstLi);
 //The second Section
 newAnchorTwo.textContent = ('Section 2');
 newAnchorTwo.setAttribute('href', '#section2');
 secondLi.appendChild(newAnchorTwo);
+secondLi.setAttribute('id', 'section2-nav')
 ul.append(secondLi);
 //The third Section
 newAnchorThree.textContent = ('Section 3');
 newAnchorThree.setAttribute('href', '#section3');
 thirdLi.appendChild(newAnchorThree);
+thirdLi.setAttribute('id', 'section3-nav')
 ul.append(thirdLi);
 //The fourth Section
 newAnchorFour.textContent = ('Section 4');
 newAnchorFour.setAttribute('href', '#section4');
 fourthLi.appendChild(newAnchorFour);
+fourthLi.setAttribute('id', 'section4-nav')
 ul.append(fourthLi);
+
+
+function isInViewport() {
+    //Looping through the ↓ sections to find the section in view
+    for (const section of sections) {
+        const box = section.getBoundingClientRect();
+        if (box.top <= 150 && box.bottom >= 150) {
+            section.classList.add("your-active-class");
+            if (firstSec.classList.contains("your-active-class") === true){
+                firstLi.classList.add('active-highlighter');
+            }
+            if (secondSec.classList.contains("your-active-class") === true) {
+                secondLi.classList.add('active-highlighter');
+            } 
+            if (thirdSec.classList.contains("your-active-class") === true) {
+                thirdLi.classList.add('active-highlighter');
+            }
+            if (fourthSec.classList.contains("your-active-class") === true) {
+                fourthLi.classList.add('active-highlighter');
+            }
+            else {
+                firstLi.classList.remove("active-highlighter");
+            secondLi.classList.remove("active-highlighter");
+            thirdLi.classList.remove("active-highlighter");
+            fourthLi.classList.remove("active-highlighter");
+            }
+        } else {
+            section.classList.remove("your-active-class");
+            
+        }
+    }
+}
+
+
 
 /**
  * End Main Functions
@@ -159,13 +140,13 @@ ul.append(fourthLi);
 // Set sections as active on scoll
 document.addEventListener("scroll", function () {isInViewport();})
 
-li.addEventListener('click', function () {
+document.addEventListener('click', function () {
     //Smooth scroll to the corresponding section
+    //const box = sections.getBoundingClientRect();
     //behavior: "smooth";
-    document.body.style.backgroundColor = "red";
-    document.body.style.Color = "blue";
-    firstSec.scrollTo({
-        top: 100,
-        behavior: "smooth",
-      });
+    window.scrollBy({
+    top: 150,
+    behavior: "smooth",
+});
+
 })
