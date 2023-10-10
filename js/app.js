@@ -35,7 +35,8 @@
 //Navigation bar variables
 const ul = document.getElementById('navbar__list');
 const navItems = ["Section 1", "Section 2", "Section 3", "Section 4"];
-const firstAnchor = document.getElementById('nav-1')
+const topMenu = document.getElementById("navbar__list");
+let lastId;
 
 //Variables for the sections
 const sections = document.querySelectorAll('main section');
@@ -129,4 +130,37 @@ document.addEventListener("click", function(event) {
       event.target.classList.add("active");
       window.location.href = "#section" + event.target.id;
     }
+    
   });
+
+  const topMenuHeight = topMenu.offsetTop + 1;
+const menuItems = document.querySelectorAll(".nav-list");
+const scrollItems = document.querySelectorAll("section");
+
+// Bind to scroll
+window.addEventListener("scroll", function() {
+  // Get container scroll position
+  const mainHeroHeight = document.querySelector(".main__hero").offsetTop;
+  console.log(mainHeroHeight);
+  let fromTop = window.pageYOffset + topMenuHeight + mainHeroHeight;
+  // Get id of current scroll item
+  let cur = [];
+
+  [...scrollItems].map(function(item) {
+    if (item.offsetTop < fromTop) {
+      cur.push(item);
+    }
+  });
+  cur = cur[cur.length - 1];
+  let id = cur ? cur.id : "";
+  if (lastId !== id) {
+    lastId = id;
+
+    menuItems.forEach(function(elem, index) {
+      elem.classList.remove("active");
+      // Look at the child "a" tags and try to find the one for our section
+      const filteredItems = [...menuItems].filter(elem => elem.children[0].getAttribute("href") === `#${id}`);
+      filteredItems[0].classList.add("active");
+    });
+  }
+});
