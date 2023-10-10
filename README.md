@@ -1,3 +1,11 @@
 # Landing-Page-Project
-Creating the functionality of a landing page using vanilla JS
-Don't forget to update this Darius
+
+## About the Project
+Using vanilla Javascript to create the functionality of a Landing Page
+## Installation
+- Clone the repo
+`git repo clone https://github.com/DTurner94/Landing-Page-Project`
+## Built With
+- HTML
+- CSS
+- Javascript
